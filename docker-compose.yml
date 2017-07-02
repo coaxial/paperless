@@ -7,7 +7,7 @@ services:
       - mayan_dropbox:/ct2p/processed
     restart: always
   mayan-edms:
-    image: coaxial/mayanedms
+    image: coaxial/mayanedms:2.3
     restart: always
     ports:
       - "8080:80"
