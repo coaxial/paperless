@@ -26,10 +26,15 @@ Run `docker-compose up` and that's it.
 
 ### Updating
 
-`docker-compose stop && docker-compose rm && docker-compose up` will pull the
-latest images for every container and recreate them. Volumes containing data
-are preserved during this operation and no data will be lost. Make sure you
-have backups before running the command, better safe than sorry.
+```
+docker-compose stop &&\
+docker-compose rm &&\
+docker-compose pull &&\
+docker-compose up
+```
+ will pull the latest images for every container and recreate them. Volumes
+containing data are preserved during this operation and no data will be lost.
+Make sure you have backups before running the command, better safe than sorry.
 
 ### Backing up
 
