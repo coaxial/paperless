@@ -1,0 +1,32 @@
+version: '3'
+services:
+  ct2p:
+    image: coaxial/ct2p
+    volumes:
+      - ct2p_dropbox:/ct2p/dropbox
+      - mayan_dropbox:/ct2p/processed
+    restart: always
+  mayan-edms:
+    image: coaxial/mayanedms
+    restart: always
+    ports:
+      - "8080:80"
+    volumes:
+      - mayan_dropbox:/srv/scanned_documents
+      - mayan_data:/var/lib/mayan
+  samba-dropbox:
+    image: dperson/samba
+    ports:
+      - "139:139"
+      - "445:445"
+    # create a share name combine_to_pdf that allows guests rw access
+    command: ["-s", "combine_to_pdf;/combine_to_pdf;yes;no;"]
+    restart: always
+    volumes:
+      - ct2p_dropbox:/combine_to_pdf
+volumes:
+  ct2p_dropbox:
+  ct2p_processed:
+  mayan_dropbox:
+  mayan_data:
+
